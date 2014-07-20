@@ -28,7 +28,6 @@ public class CC4Parser
 	 */
 	
 	private Semantic semantic;
-	
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -38,7 +37,6 @@ public class CC4Parser
 	 */
 	
 	public CC4Parser(Scanner parameter) {
-		// TODO construct me
 		super();
 		scannerA = parameter;
 	}
@@ -51,7 +49,6 @@ public class CC4Parser
 	 */
 	
 	public void parse() {
-		// TODO implement me	
 		System.out.println("Analizando estructura de "+scannerA.inputFile);
 	}
 	
@@ -62,9 +59,14 @@ public class CC4Parser
 	 * @ordered
 	 */
 	
-	private boolean validateTokens() {
-		// TODO implement me
-		return false;	
+	private boolean validateTokens(String tokens) {
+		/*Simulacion de token*/
+		boolean value;
+		if (tokens.length()>0) {
+			value=true
+		} else {
+			value = false
+		}
 	}
 	
 	/**
@@ -75,7 +77,7 @@ public class CC4Parser
 	 */
 	
 	public void makeSintaxisTree() {
-		// TODO implement me	
+		System.out.println("Creando arbol de sintaxis");
 	}
 	
 }
