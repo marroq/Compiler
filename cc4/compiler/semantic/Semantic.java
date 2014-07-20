@@ -20,7 +20,6 @@ public class Semantic
 	
 	private Scanner scanner;
 	
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
@@ -30,7 +29,6 @@ public class Semantic
 	
 	public Semantic(Ast parameter) {
 		super();
-		// TODO construct me	
 	}
 	
 	/**
@@ -41,8 +39,7 @@ public class Semantic
 	 */
 	
 	public void checkSemantic() {
-		// TODO implement me	
+		System.out.println("Analizando sentido del programa");
 	}
-	
 }
 
