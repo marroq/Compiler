@@ -35,7 +35,19 @@ public class Compiler
 	 */
 	public Compiler(){
 		super();
+		count = 0;
 	}
+
+
+	/**
+	 * <!-- begin-user-doc -->
+	 Contador para creacion de instancias
+	 * <!--  end-user-doc  -->
+	 * @generated
+	 * @ordered
+	 */
+
+	 public static int count;
 	
 	/**
 	 * <!-- begin-user-doc -->
@@ -120,5 +132,7 @@ public class Compiler
 		} else {
 			help();
 		}
+		Scanner scanner = new Scanner(args[args.length-1]);
+		scanner.scan();
 	}	
 }

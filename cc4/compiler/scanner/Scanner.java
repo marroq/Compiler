@@ -38,6 +38,7 @@ public class Scanner
 	
 	public Scanner(String inputFileName) {
 		super();
+		this.inputFileName = inputFileName;
 		// TODO construct me	
 	}
 	
@@ -49,8 +50,8 @@ public class Scanner
 	 */
 	
 	public void scan() {
-		// TODO implement me	
+		// TODO implement me
+		System.out.println("Ejecutando fase scanner de archivo "+inputFileName);
 	}
-	
 }
 
