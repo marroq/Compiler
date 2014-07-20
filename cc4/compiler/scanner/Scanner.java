@@ -28,7 +28,6 @@ public class Scanner
 	
 	private java.util.ArrayList tokens;
 	
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->

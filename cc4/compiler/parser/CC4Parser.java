@@ -17,6 +17,15 @@ public class CC4Parser
 	 * @generated
 	 * @ordered
 	 */
+
+	public Scanner scannerA;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!--  end-user-doc  -->
+	 * @generated
+	 * @ordered
+	 */
 	
 	private Semantic semantic;
 	
@@ -29,8 +38,9 @@ public class CC4Parser
 	 */
 	
 	public CC4Parser(Scanner parameter) {
+		// TODO construct me
 		super();
-		// TODO construct me	
+		scannerA = parameter;
 	}
 	
 	/**
@@ -42,6 +52,7 @@ public class CC4Parser
 	
 	public void parse() {
 		// TODO implement me	
+		System.out.println("Analizando estructura de "+scannerA.inputFile);
 	}
 	
 	/**
