@@ -31,7 +31,6 @@ public class Ast
 	
 	public Ast(CC4Parser parameter) {
 		super();
-		// TODO construct me	
 	}
 	
 	/**
@@ -42,7 +41,7 @@ public class Ast
 	 */
 	
 	public void makeTree() {
-		// TODO implement me	
+		System.out.println("Creando arbol de sintaxis");
 	}
 	
 }

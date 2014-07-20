@@ -29,7 +29,7 @@ public class Irt
 	 */
 	
 	public void translateAst() {
-		// TODO implement me	
+		System.out.println("Transformando codigo a representacion en bajo nivel");
 	}
 	
 	/**
@@ -41,7 +41,6 @@ public class Irt
 	
 	public Irt(Semantic parameter) {
 		super();
-		// TODO construct me	
 	}
 	
 }

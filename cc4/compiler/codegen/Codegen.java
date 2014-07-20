@@ -1,7 +1,7 @@
 package cc4.compiler.codegen;
 import cc4.compiler.irt.Irt;
 import cc4.compiler.irt.Irt;
-
+import java.io.File;
 
 /**
  * <!-- begin-user-doc -->
@@ -11,6 +11,16 @@ import cc4.compiler.irt.Irt;
 
 public class Codegen
 {
+	/**
+	 * <!-- begin-user-doc -->
+	 Objeto para generar arhivo para nuevo código.
+	 * <!--  end-user-doc  -->
+	 * @generated
+	 * @ordered
+	 */
+
+	File create;
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -21,7 +31,6 @@ public class Codegen
 	
 	public Codegen(Irt parameter) {
 		super();
-		// TODO construct me	
 	}
 	
 	/**
@@ -32,8 +41,7 @@ public class Codegen
 	 */
 	
 	public void generate() {
-		// TODO implement me	
+		create = new File("/home/dfer/Escritorio/Compiler/cc4");
 	}
 	
 }
-
