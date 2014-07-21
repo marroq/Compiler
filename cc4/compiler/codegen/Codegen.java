@@ -1,6 +1,6 @@
-package cc4.compiler.codegen;
-import cc4.compiler.irt.Irt;
-import cc4.compiler.irt.Irt;
+package compiler.codegen;
+import compiler.irt.Irt;
+import compiler.irt.Irt;
 import java.io.File;
 
 /**
@@ -20,7 +20,6 @@ public class Codegen
 	 */
 
 	File create;
-
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -1,6 +1,6 @@
-package cc4.compiler.semantic;
-import cc4.compiler.ast.Ast;
-import cc4.compiler.scanner.Scanner;
+package compiler.semantic;
+import compiler.ast.Ast;
+import compiler.scanner.Scanner;
 
 
 /**

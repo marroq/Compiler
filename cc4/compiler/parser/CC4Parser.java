@@ -1,6 +1,6 @@
-package cc4.compiler.parser;
-import cc4.compiler.scanner.Scanner;
-import cc4.compiler.semantic.Semantic;
+package compiler.parser;
+import compiler.scanner.Scanner;
+import compiler.semantic.Semantic;
 
 
 /**

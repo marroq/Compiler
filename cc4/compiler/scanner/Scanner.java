@@ -1,6 +1,5 @@
-package cc4.compiler.scanner;
-import cc4.compiler.parser.CC4Parser;
-
+package compiler.scanner;
+import compiler.parser.CC4Parser;
 
 /**
  * <!-- begin-user-doc -->

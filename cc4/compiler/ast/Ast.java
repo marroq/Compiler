@@ -1,8 +1,7 @@
-package cc4.compiler.ast;
-import cc4.compiler.parser.CC4Parser;
-import cc4.compiler.parser.CC4Parser;
-import cc4.compiler.semantic.Semantic;
-
+package compiler.ast;
+import compiler.parser.CC4Parser;
+import compiler.parser.CC4Parser;
+import compiler.semantic.Semantic;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,4 +44,3 @@ public class Ast
 	}
 	
 }
-

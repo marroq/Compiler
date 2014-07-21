@@ -1,5 +1,4 @@
-package cc4.compiler.lib;
-
+package compiler.lib;
 
 /**
  * <!-- begin-user-doc -->

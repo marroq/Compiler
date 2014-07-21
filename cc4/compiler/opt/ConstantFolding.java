@@ -1,6 +1,6 @@
-package cc4.compiler.opt;
-import cc4.compiler.irt.Irt;
-import cc4.compiler.irt.Irt;
+package compiler.opt;
+import compiler.irt.Irt;
+import compiler.irt.Irt;
 
 
 /**
