@@ -12,12 +12,9 @@ import java.io.File;
 public class Compiler {
 
 	public static Hashtable<String, String> flags = new Hashtable<String, String>();
-	public static int currentStage = 0;
-	
-	public Compiler(){
+	public static int currentStage = 0;	
+	public static int stopStage = 0;
 
-	}
-	
 	/**
 	 * Verifica la existencia de un archivo a partir del path enviado.
 	 * @param path Representa la direccion del source code a compilar.	 
@@ -63,9 +60,9 @@ public class Compiler {
 		}
 		String supportedFlags = "-target, -opt, -debug, -h, -o";
 		String[][] supportedFlagValues = {
-			{"-target", "scan, parse, ast, semantic, irt, codegen"},
-			{"opt", "constant, algebraic"},
-			{"debug", "scan, parse, ast, semantic, irt, codegen"}
+			{"-target", "scan,parse,semantic,ast,irt,codegen"},
+			{"opt", "constant,algebraic"},
+			{"debug", "scan,parse,semantic,ast,irt,codegen"}
 		};
 
 		int length = args.length;
@@ -95,6 +92,20 @@ public class Compiler {
 				System.exit(1);
 			}
 		}		
+
+		//Settear el flag limite. Hasta donde se debe llegar.
+		if (Compiler.flags.get("-target") == null) {
+			System.err.println("\nEl flag -target es OBLIGATORIO.");
+			System.exit(1);
+		}	
+
+		int counterStopStage = 1;
+		for (String f : "scan,parse,semantic,ast,irt,codegen".split(",")) {
+			if (f.trim().equals(Compiler.flags.get("-target"))) {
+				Compiler.stopStage = counterStopStage;
+			}
+			counterStopStage++;
+		}
 
 		Scanner s = new Scanner(Compiler.flags.get("inputFile"));
 		s.scan();
