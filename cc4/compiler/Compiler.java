@@ -1,138 +1,114 @@
-package cc4.compiler;
-import cc4.compiler.scanner.Scanner;
-import java.util.ArrayList;
+import compiler.scanner.Scanner;
+import java.util.Hashtable;
+import java.io.File;
 
 /**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
+ * Clase principal del Compilador, se encarga
+ * de validar y verificar toda la informacion necesaria
+ * para iniciar el proceso de compilacion.
+ * @author Alexander Baquiax (alexbqb@galileo.edu)
  */
 
-public class Compiler
-{
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+public class Compiler {
+
+	public static Hashtable<String, String> flags = new Hashtable<String, String>();
+	public static int currentStage = 0;
 	
-	public static ArrayList<String> flags;
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
-	public ArrayList<String> debugStages;
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 */
 	public Compiler(){
-		super();
-		count = 0;
+
 	}
-
-
-	/**
-	 * <!-- begin-user-doc -->
-	 Contador para creacion de instancias
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-
-	 public static int count;
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Verifica la existencia de un archivo a partir del path enviado.
+	 * @param path Representa la direccion del source code a compilar.	 
+	 * @return boolean Devuevel true si existe el archivo, false si no.
 	 */
 	
-	private boolean existsFile(String parameter) {
-		// TODO implement me
-		return false;	
+	public static boolean existsFile(String path) {		
+		File f = new File(path);
+		return f.exists() && !f.isDirectory();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 Método para imprimir el menú de ayuda al usuario
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
+	 * Unicamente imprime el resultado del commando <b>-h</b>
 	 */
-	
+
 	private static void help() {
-		// TODO implement me
-		System.out.println("*****	MENU DE AYUDA 	*****");
-		System.out.println("-o <outname>\n\tEscribir el output a un archivo de texto llamado <outname>.");
-		System.out.println("-target <stage>\n\tDonde <stage> es uno de: scan, parse, ast, semantic, irt, codegen; la compilación debe proceder hasta la etapa indicada.");
-		System.out.println("-opt <optimzation>\n\t<optimization> es uno de: constant, algebraic.");
-		System.out.println("-debug <stage>\n\tImprimir información de debugging.");
-		System.out.println("<stage> tiene las mismas opciones de -target, con la diferencia que se pueden 'debuggear' varias etapas, separandolas con ':' de la forma scan:parse:etc.");
-		System.out.println("-h\n\tMuestra esta ayuda al usuario.");
-	}
+		System.out.println(
+            String.format("%-5s %5s\n", "Uso: ", "java Compiler [options] <source FILE>*\n* es requerido.\nDonde las opciones posibles son: ")
+        );
+		String[][] validFlags =  {
+			{"-target <stage>*", "Donde <stage> puede ser: scan, parse, ast, semantic, irt, codegen; la compilacion porcede hasta la etapa indicada."},
+			{"-o <outcome>", "Escribir el output a un archivo llamado <outname>."},			
+			{"-opt <optimization>", "<optimization> puede ser: constant o algebraic."},
+			{"-debug <stage1:stage2:..>", "Imprimir información en las etapas indicadas. "},			
+			{"-h", "Muestra esta ayuda al usuario."}
+		};
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+		for (String[] flag : validFlags) {
+        	System.out.println(
+            	String.format("%-25s %10s\n", flag[0], flag[1])
+        	);
+    	}
+	}
 	
 	public static void main(String[] args) {
-		// TODO implement me
-		int h=0,o=0,target=0,opt=0,debug=0;
-		if (args.length>0) {
-			for (int i=0;i<args.length;i++) {
-				if (args[i].equals("-h")) {
-					if (h>0) {
-						h++;	
-					} else {
-						help();
-					}
-					h++;
-				} else if (args[i].equals("-o")) {
-					if (o>0) {
-						o++;	
-					} else {
-						System.out.println("ESTOY EJECUTANDO -o");	
-					}
-					o++;
-				} else if (args[i].equals("-target")) {
-					if (target>0) {
-						target++;
-					} else {
-						System.out.println("ESTOY EJECUTANDO -target");	
-					}
-					target++;
-				} else if (args[i].equals("-opt")) {
-					if (opt>0) {
-						opt++;	
-					} else {
-						System.out.println("ESTOY EJECUTANDO -opt");
-					}
-					opt++;
-				} else if (args[i].equals("-debug")) {
-					if (debug>0) {
-						debug++;	
-					} else {
-						System.out.println("ESTOY EJECUTANDO -debug");
-					}
-					debug++;	
-				}
-			}	
-		} else {
+		//Deben haber al menos 3 parametros.
+		if (args.length > 0 && args.length < 3) {
+			System.err.println("No ha indicado los parametros minimos requeridos\nUse el flag -h para ver la ayuda.");
+			System.exit(1);
+		} else if (args.length == 0) {
 			help();
+			System.exit(0);
 		}
-		Scanner scanner = new Scanner(args[args.length-1]);
-		scanner.scan();
-	}	
+		String supportedFlags = "-target, -opt, -debug, -h, -o";
+		String[][] supportedFlagValues = {
+			{"-target", "scan, parse, ast, semantic, irt, codegen"},
+			{"opt", "constant, algebraic"},
+			{"debug", "scan, parse, ast, semantic, irt, codegen"}
+		};
+
+		int length = args.length;
+		int i = 0;
+		for (; (i + 2) <= length; i += 2) {
+			if (!supportedFlags.contains(args[i])) {
+				System.err.println("El flag " + args[i] + ", no se reconoce.");
+				System.exit(1);
+			}
+			Compiler.flags.put(args[i], args[i + 1]);
+		}
+		if (((length - i) == 0)) {
+			System.err.println("No has indicado el archivo a compilar");
+			System.exit(1);
+		}
+		
+		Compiler.flags.put("inputFile", args[length - 1]);
+		if (!Compiler.existsFile(Compiler.flags.get("inputFile"))) {
+			System.err.println("El archivo a compilar no existe!");
+			System.exit(1);
+		} 
+
+		for (String[] f: supportedFlagValues) {
+			if (Compiler.flags.get(f[0]) != null && 
+				!Compiler.checkIn(Compiler.flags.get(f[0]), f[1] )) {
+				System.err.println("\tAl parecer has indicado un " + f[0] +" invalido.");
+				System.exit(1);
+			}
+		}		
+
+		Scanner s = new Scanner(Compiler.flags.get("inputFile"));
+		s.scan();
+	}
+
+	public static boolean checkIn(String toFind, String findIn) {
+		if (toFind.contains(":")) {
+			String[] values = toFind.split(":");
+			for (String s : values) {
+				if (!findIn.contains(s)) return false;
+			}
+			return true;
+		} else {
+			return findIn.contains(toFind);
+		}
+	}
 }
