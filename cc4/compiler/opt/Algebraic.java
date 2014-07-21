@@ -1,6 +1,5 @@
 package compiler.opt;
 import compiler.irt.Irt;
-import compiler.irt.Irt;
 
 /**
  * <!-- begin-user-doc -->

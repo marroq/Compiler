@@ -2,7 +2,6 @@ package compiler.parser;
 import compiler.scanner.Scanner;
 import compiler.semantic.Semantic;
 
-
 /**
  * <!-- begin-user-doc -->
  * <!--  end-user-doc  -->
@@ -11,15 +10,6 @@ import compiler.semantic.Semantic;
 
 public class CC4Parser
 {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-
-	public Scanner scannerA;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
@@ -38,7 +28,6 @@ public class CC4Parser
 	
 	public CC4Parser(Scanner parameter) {
 		super();
-		scannerA = parameter;
 	}
 	
 	/**
@@ -49,7 +38,7 @@ public class CC4Parser
 	 */
 	
 	public void parse() {
-		System.out.println("Analizando estructura de "+scannerA.inputFile);
+		System.out.println("Analizando estructura");
 	}
 	
 	/**
@@ -63,10 +52,11 @@ public class CC4Parser
 		/*Simulacion de token*/
 		boolean value;
 		if (tokens.length()>0) {
-			value=true
+			value=true;
 		} else {
-			value = false
+			value = false;
 		}
+		return value;
 	}
 	
 	/**
@@ -79,6 +69,4 @@ public class CC4Parser
 	public void makeSintaxisTree() {
 		System.out.println("Creando arbol de sintaxis");
 	}
-	
 }
-

@@ -1,6 +1,5 @@
 package compiler.ast;
 import compiler.parser.CC4Parser;
-import compiler.parser.CC4Parser;
 import compiler.semantic.Semantic;
 
 /**
@@ -19,7 +18,6 @@ public class Ast
 	 */
 	
 	private Semantic semanticAnalized;
-	
 
 	/**
 	 * <!-- begin-user-doc -->

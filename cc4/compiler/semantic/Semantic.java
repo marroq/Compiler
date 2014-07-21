@@ -2,7 +2,6 @@ package compiler.semantic;
 import compiler.ast.Ast;
 import compiler.scanner.Scanner;
 
-
 /**
  * <!-- begin-user-doc -->
  * <!--  end-user-doc  -->
@@ -42,4 +41,3 @@ public class Semantic
 		System.out.println("Analizando sentido del programa");
 	}
 }
-

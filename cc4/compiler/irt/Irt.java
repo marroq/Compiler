@@ -1,6 +1,5 @@
-package cc4.compiler.irt;
-import cc4.compiler.semantic.Semantic;
-import cc4.compiler.semantic.Semantic;
+package compiler.irt;
+import compiler.semantic.Semantic;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +19,6 @@ public class Irt
 	
 	private ArrayList<String>  listSintaxis;
 	
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!--  end-user-doc  -->
@@ -42,5 +40,4 @@ public class Irt
 	public Irt(Semantic parameter) {
 		super();
 	}
-	
 }
