@@ -108,7 +108,7 @@ public class Compiler {
             System.exit(1);
         }
 
-        int stopStage = 0;
+        int stopStage = 1;
         for (String f: "scan,parse,semantic,ast,irt,codegen".split(",")) {
             if (f.trim().equals(flags.get("-target"))) break;
             stopStage++;

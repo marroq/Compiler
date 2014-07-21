@@ -1,43 +1,32 @@
 package compiler.semantic;
-import compiler.ast.Ast;
+import compiler.lib.Debug;
 import compiler.scanner.Scanner;
+import compiler.ast.Ast;
+import compiler.irt.Irt;
 
 /**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
+ * Esta clase se encarga de verificar la coherencia de las operaciones.
+ * Necesita un AST.
  */
 
-public class Semantic
-{
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+public class Semantic {	
+
+	public static final int level = 4;
+	private Ast ast;	
 	
-	private Scanner scanner;
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
-	public Semantic(Ast parameter) {
-		super();
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+	public Semantic(Ast ast) {
+		this.ast = ast;
+		
+		System.out.println("stage: SEMANTIC");
+        if (Debug.debugEnabled("semantic")) System.out.println("debugging: SEMANTIC");
+	}	
 	
 	public void checkSemantic() {
-		System.out.println("Analizando sentido del programa");
+		if (Scanner.stopStage > Semantic.level) {
+        	Irt irt = new Irt(this);
+        	irt.translateAst();
+        } else {
+        	System.out.println("El proceso se ha detenido.");
+        }		
 	}
 }

@@ -1,74 +1,44 @@
 package compiler.lib;
+import compiler.scanner.Scanner;
 
 /**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
+ * Esta clase es tuilizada para debugear el proceoso de compilacion.
+ * Hagran metodos destinados a formatear los mensajes, e incluso se
+ * podra especificar un archivo de salida para almacenar la informacion
+ * como log.
  */
 
-public class Debug
-{
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
-	public String logPath;
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 */
+public class Debug {
+
+	private String logPath;
+		
 	public Debug(){
-		super();
+		
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
-	public void Degub() {
-		// TODO implement me
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
+
 	public void printError(String parameter, String parameter2) {
 		// TODO implement me	
 	}
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
+
 	public void printWarning(String parameter, String parameter2) {
 		// TODO implement me	
 	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+		
 	
 	public String setLogPath() {
 		// TODO implement me
 		return "";	
+	}
+
+	public static boolean debugEnabled(String level) {
+		if (Scanner.flags.get("-debug") != null) {
+			for (String l : Scanner.flags.get("-debug").split(":")) {
+				if (l.equals(level)) return true;
+			}
+		}
+		return false;
 	}
 	
 }

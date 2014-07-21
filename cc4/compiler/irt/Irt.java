@@ -1,44 +1,32 @@
 package compiler.irt;
+import compiler.lib.Debug;
 import compiler.semantic.Semantic;
 import compiler.scanner.Scanner;
+import compiler.codegen.Codegen;
 import java.util.ArrayList;
 
-/**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
- */
-
-public class Irt
-{
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+public class Irt {	
 	
+	public static final int level = 5;
+	private Semantic semantic;
 	private ArrayList<String>  listSintaxis;
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+	public Irt(Semantic semantic) {
+		this.semantic = semantic;
+		
+		System.out.println("stage: IRT");
+        if (Debug.debugEnabled("irt")) System.out.println("debugging: IRT");		
+	}
 	
 	public void translateAst() {
-		System.out.println("Transformando codigo a representacion en bajo nivel");
-	}
+		//VERIFICAR EL FLAGO -opt
+
+		if (Scanner.stopStage > Irt.level) {
+        	Codegen codegen = new Codegen(this);
+        	codegen.generate();
+        } else {
+        	System.out.println("El proceso se ha detenido.");
+        }		
+	}	
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
-	public Irt(Semantic parameter) {
-		super();
-	}
 }

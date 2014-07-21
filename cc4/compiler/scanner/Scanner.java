@@ -1,58 +1,42 @@
 package compiler.scanner;
 import compiler.parser.CC4Parser;
+import compiler.lib.Debug;
 import java.util.Hashtable;
+import java.util.ArrayList;
 
 /**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
+ * Esta clase represetna el nivel de analisis,
+ * el cual se encargara de tokenizar el source-file.
  */
 
 public class Scanner
 {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
-	public Hashtable < String, String > inputFileName;
-	public int stopStage;
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
-	private java.util.ArrayList tokens;
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
-	public Scanner(Hashtable < String, String > parameter, int stop) {
-		super();
-		inputFileName=parameter;
-		stopStage=stop;
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
-	public void scan() {
-		System.out.println("Ejecutando fase scanner de archivo "+inputFileName.get("-o"));
-		if (stopStage>1) {
-			CC4Parser parser = new CC4Parser(this);
-		}
-	}
+    public static final int level = 1;
+    public static Hashtable < String, String > flags;
+    public static int stopStage;
+    private ArrayList<String> tokens;
+        
+    public Scanner(Hashtable < String, String > flags, int stopStage) {
+        this.tokens = new ArrayList<String>();
+        Scanner.stopStage = stopStage;
+        Scanner.flags = flags;
+
+        System.out.println("stage: SCAN");
+        if (Debug.debugEnabled("scan")) System.out.println("debugging: SCAN");
+    }
+    
+    /**
+     * Inicia el proceso del Scanner. El Compiler se encarga de validar si el source-file    
+     * existe, por lo que si llega aca se puede cargar el archivo en memoria con confianza.     
+     */
+    
+    public void scan() {                
+        if (Scanner.stopStage > Scanner.level) {
+            CC4Parser parser = new CC4Parser(this);
+            parser.parse();
+        } else {
+            System.out.println("El proceso se ha detenido.");
+        }
+    }
+    
 }

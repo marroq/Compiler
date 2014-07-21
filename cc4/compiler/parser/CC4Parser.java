@@ -1,72 +1,43 @@
 package compiler.parser;
+import compiler.lib.Debug;
 import compiler.scanner.Scanner;
-import compiler.semantic.Semantic;
+import compiler.ast.Ast;
 
 /**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
+ * El parser se encarga de validar la sintaxis de las tokens.
  */
 
 public class CC4Parser
 {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+	public static final int level = 2;
+	private Scanner scanner;
 	
-	private Semantic semantic;
+	public CC4Parser(Scanner scanner) {
+		this.scanner = scanner;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+		System.out.println("stage: PARSE");
+        if (Debug.debugEnabled("parse")) System.out.println("debugging: PARSE");
+	}		
 	
-	public CC4Parser(Scanner parameter) {
-		super();
+	/**
+	 * Inicia el proceso del parser.
+	 */
+	public void parse() {        
+        if (Scanner.stopStage > CC4Parser.level) {
+        	Ast ast = new Ast(this);
+        	ast.makeTree();
+        } else {
+        	System.out.println("El proceso se ha detenido.");
+        }
 	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
-	public void parse() {
-		System.out.println("Analizando estructura");
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
+			
 	private boolean validateTokens(String tokens) {
-		/*Simulacion de token*/
-		boolean value;
-		if (tokens.length()>0) {
-			value=true;
-		} else {
-			value = false;
-		}
-		return value;
+		// TODO implement me
+		return false;
 	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
+		
 	public void makeSintaxisTree() {
-		System.out.println("Creando arbol de sintaxis");
+		// TODO implement me
+		
 	}
 }
