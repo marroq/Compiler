@@ -1,5 +1,6 @@
 package compiler.codegen;
 import compiler.irt.Irt;
+import compiler.scanner.Scanner;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
@@ -42,7 +43,7 @@ public class Codegen
 	 */
 	
 	public void generate() {
-		create = new File("/home/dfer/Escritorio/Compiler/cc4/programa.txt");
+		create = new File("/home/dfer/Escritorio/Compiler/cc4/programa.decaf");
 		FileWriter archive = null;
         PrintWriter writer = null;
 		try {

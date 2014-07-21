@@ -1,5 +1,6 @@
 package compiler.irt;
 import compiler.semantic.Semantic;
+import compiler.scanner.Scanner;
 import java.util.ArrayList;
 
 /**

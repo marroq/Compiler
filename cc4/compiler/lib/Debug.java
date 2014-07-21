@@ -34,7 +34,7 @@ public class Debug
 	 */
 	
 	public void Degub() {
-		// TODO implement me	
+		// TODO implement me
 	}
 	
 	/**

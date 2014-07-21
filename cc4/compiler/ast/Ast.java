@@ -1,6 +1,7 @@
 package compiler.ast;
 import compiler.parser.CC4Parser;
 import compiler.semantic.Semantic;
+import compiler.scanner.Scanner;
 
 /**
  * <!-- begin-user-doc -->

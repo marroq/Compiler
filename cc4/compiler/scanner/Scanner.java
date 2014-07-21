@@ -1,5 +1,6 @@
 package compiler.scanner;
 import compiler.parser.CC4Parser;
+import java.util.Hashtable;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,7 +17,8 @@ public class Scanner
 	 * @ordered
 	 */
 	
-	private String inputFileName;
+	public Hashtable < String, String > inputFileName;
+	public int stopStage;
 	
 	/**
 	 * <!-- begin-user-doc -->
@@ -34,9 +36,10 @@ public class Scanner
 	 * @ordered
 	 */
 	
-	public Scanner(String inputFileName) {
+	public Scanner(Hashtable < String, String > parameter, int stop) {
 		super();
-		this.inputFileName = inputFileName;
+		inputFileName=parameter;
+		stopStage=stop;
 	}
 	
 	/**
@@ -47,6 +50,9 @@ public class Scanner
 	 */
 	
 	public void scan() {
-		System.out.println("Ejecutando fase scanner de archivo "+inputFileName);
+		System.out.println("Ejecutando fase scanner de archivo "+inputFileName.get("-o"));
+		if (stopStage>1) {
+			CC4Parser parser = new CC4Parser(this);
+		}
 	}
 }
