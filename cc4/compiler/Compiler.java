@@ -55,58 +55,52 @@ public class Compiler {
             help();
             System.exit(0);
         } else if (args.length < 3) {
-            System.err.println("No ha indicado los parametros minimos requeridos\nUse el flag -h para ver la ayuda.");
-            System.exit(1);
+            Compiler.printMessageAndExit("No ha indicado los parametros minimos requeridos\nUse el flag -h para ver la ayuda.", 1);
         }
 
         String supportedFlags = "-target,-opt,-debug,-h,-o,";
         String[][] supportedFlagValues = {
             {
-                "-target", "scan,parse,semantic,ast,irt,codegen"
+                "-target", "scan,parse,semantic,ast,irt,codegen,"
             }, {
-                "-opt", "constant,algebraic"
+                "-opt", "constant,algebraic,"
             }, {
-                "-debug", "scan,parse,semantic,ast,irt,codegen"
+                "-debug", "scan,parse,semantic,ast,irt,codegen,"
             }, {
                 "-h", ""
             }
         };
 
         Hashtable < String, String > flags = new Hashtable < String, String > ();
-
-        int length = args.length;
+                
         int i = 0;
-        for (;
-        (i + 2) <= length; i += 2) {
-            if (!supportedFlags.contains(args[i] + ",")) {
-                System.err.println("El flag " + args[i] + ", no se reconoce.");
-                System.exit(1);
-            }
+        for (; (i + 2) <= args.length; i += 2) {
+            if (!supportedFlags.contains(args[i] + ",")) Compiler.printMessageAndExit("El flag " + args[i] + ", no se reconoce.", 1);
             flags.put(args[i], args[i + 1]);
         }
-        if (((length - i) == 0)) {
-            System.err.println("No has indicado el archivo a compilar");
-            System.exit(1);
+
+        if (((args.length - i) == 0)) Compiler.printMessageAndExit("No has indicado el archivo fuente a compilar.", 1);
+        flags.put("inputFile", args[args.length - 1]);
+
+        String fileName = flags.get("inputFile");
+
+        if (fileName.contains("/") && fileName.split("/").length > 0) {
+            String[] fileNameParted = fileName.split("/");
+            fileName = fileNameParted[fileNameParted.length - 1];
         }
 
-        flags.put("inputFile", args[length - 1]);
-        if (!Compiler.existsFile(flags.get("inputFile"))) {
-            System.err.println("El archivo a compilar no existe!");
-            System.exit(1);
-        }
+        if(fileName.matches("[\\.-]+.*")) Compiler.printMessageAndExit("El nombre del archivo de entrada no debe empezar con . o -", 1);        
+
+        if (!Compiler.existsFile(flags.get("inputFile"))) Compiler.printMessageAndExit("El archivo a compilar no existe!", 1);
 
         for (String[] f: supportedFlagValues) {
             if (flags.get(f[0]) != null && !Compiler.checkIn(flags.get(f[0]), f[1])) {
-                System.err.println("\tAl parecer has indicado un " + f[0] + " invalido.");
-                System.exit(1);
+                Compiler.printMessageAndExit("\tHa indicado un valor no valido para " + f[0], 1);
             }
         }
 
         //Settear el flag limite. Hasta donde se debe llegar.
-        if (flags.get("-target") == null) {
-            System.err.println("\nEl flag -target es OBLIGATORIO.");
-            System.exit(1);
-        }
+        if (flags.get("-target") == null)  Compiler.printMessageAndExit("\nEl flag -target es OBLIGATORIO.", 1);
 
         int stopStage = 1;
         for (String f: "scan,parse,semantic,ast,irt,codegen".split(",")) {
@@ -122,11 +116,25 @@ public class Compiler {
         if (toFind.contains(":")) {
             String[] values = toFind.split(":");
             for (String s: values) {
-                if (!findIn.contains(s)) return false;
+                if (!findIn.contains(s + ",")) return false;
             }
             return true;
         } else {
-            return findIn.contains(toFind);
+            return findIn.contains(toFind + ",");
+        }
+    }
+
+    private static void printMessageAndExit (String message, int type) {
+        //type 0 no error, 1 error.
+
+        switch (type) {
+            case 1:
+                System.err.println(message);
+                System.exit(type);
+                break;
+            default:
+                System.out.println(message);
+                System.exit(type);
         }
     }
 }
