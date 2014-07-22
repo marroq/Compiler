@@ -19,6 +19,21 @@ public class Codegen {
 	}
 			
 	public void generate() {
-		// TODO implement me
+		String output = Scanner.flags.get("-o");
+		if (output == null) {
+			output = Scanner.flags.get("inputFile");			
+			output += ".s";
+		}
+		File outputFile = new File(output);
+		try {
+			outputFile.createNewFile();			
+			FileWriter fwriter = new FileWriter(output);
+			PrintWriter pwriter = new PrintWriter(fwriter);
+			pwriter.println("Fin de compilacion.");
+			fwriter.close();
+
+		} catch (Exception e) {
+			System.err.println("No se ha podido guardar el archivo de salida.");
+		}
 	}
 }

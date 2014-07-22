@@ -59,7 +59,7 @@ public class Compiler {
             System.exit(1);
         }
 
-        String supportedFlags = "-target, -opt, -debug, -h, -o";
+        String supportedFlags = "-target,-opt,-debug,-h,-o,";
         String[][] supportedFlagValues = {
             {
                 "-target", "scan,parse,semantic,ast,irt,codegen"
@@ -78,7 +78,7 @@ public class Compiler {
         int i = 0;
         for (;
         (i + 2) <= length; i += 2) {
-            if (!supportedFlags.contains(args[i])) {
+            if (!supportedFlags.contains(args[i] + ",")) {
                 System.err.println("El flag " + args[i] + ", no se reconoce.");
                 System.exit(1);
             }

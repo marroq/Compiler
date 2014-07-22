@@ -3,6 +3,8 @@ import compiler.lib.Debug;
 import compiler.semantic.Semantic;
 import compiler.scanner.Scanner;
 import compiler.codegen.Codegen;
+import compiler.opt.Algebraic;
+import compiler.opt.ConstantFolding;
 import java.util.ArrayList;
 
 public class Irt {	
@@ -19,7 +21,14 @@ public class Irt {
 	}
 	
 	public void translateAst() {
-		//VERIFICAR EL FLAGO -opt
+		//VERIFICAR EL FLAG -opt
+		if (Scanner.flags.get("-opt") != null) {
+			if (Scanner.flags.get("-opt").equals("algebraic")) {
+				Algebraic.optimize(this);
+			} else {
+				ConstantFolding.optimize(this);
+			}
+		}
 
 		if (Scanner.stopStage > Irt.level) {
         	Codegen codegen = new Codegen(this);
